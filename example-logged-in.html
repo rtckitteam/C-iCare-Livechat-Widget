@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example: Signed-in Customer - C-iCare Livechat Widget</title>
+
+  <!--
+    ============================================================================
+    EXAMPLE 2 - SIGNED-IN CUSTOMER
+    ============================================================================
+
+    Use this when your page ALREADY knows who the user is: member dashboards,
+    account pages, internal tools, or a WebView inside your mobile app after
+    the user has signed in.
+
+    Alongside data-widget-key, the page passes the identity it already holds:
+
+        data-name    customer name    (optional, a label only)
+        data-email   customer email
+        data-phone   customer phone number
+
+    As soon as data-email OR data-phone is set, the pre-chat form is NOT shown.
+    The customer taps a single "Start Live Chat" button and that identity is
+    sent as the session is created - there is nothing left to type.
+
+    At least one of data-email or data-phone must be present. data-name alone
+    is not enough: a name is a label, not a contact.
+
+    | what the page sends                 | what the customer sees        |
+    |-------------------------------------|-------------------------------|
+    | (nothing)                           | pre-chat form                 |
+    | data-name only                      | pre-chat form, name filled in |
+    | data-email                          | "Start Live Chat" button      |
+    | data-phone                          | "Start Live Chat" button      |
+    | data-name + data-email + data-phone | "Start Live Chat" button      |
+
+    For anonymous visitors, see example-guest.html
+    ============================================================================
+  -->
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f6f8; --card: #fff; --text: #1c2733; --muted: #5b6b7a;
+      --border: #d7dee5; --accent: #1B9EB3; --code-bg: #1e2127; --code-fg: #d5d8dd;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #14181c; --card: #1c2126; --text: #e8edf2; --muted: #9aa8b5; --border: #333c45; }
+    }
+    body {
+      margin: 0; padding: 2.5rem 1.25rem; background: var(--bg); color: var(--text);
+      font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    .wrap { max-width: 44rem; margin: 0 auto; }
+    h1 { font-size: 1.35rem; margin: 0 0 .25rem; }
+    p.sub { margin: 0 0 1.75rem; color: var(--muted); }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 1.4rem; margin-bottom: 1.25rem;
+    }
+    .card h2 {
+      font-size: .78rem; text-transform: uppercase; letter-spacing: .06em;
+      color: var(--muted); margin: 0 0 .85rem;
+    }
+    pre {
+      background: var(--code-bg); color: var(--code-fg); border-radius: 8px;
+      padding: 1rem; overflow-x: auto; margin: 0;
+      font: 13px/1.6 ui-monospace, Menlo, Consolas, monospace;
+    }
+    code { font-family: ui-monospace, Menlo, Consolas, monospace; }
+    p code, li code, td code {
+      background: rgba(127,127,127,.15); padding: 1px 5px; border-radius: 4px; font-size: .87em;
+    }
+    ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+    li { margin-bottom: .35rem; }
+    .note {
+      border-left: 3px solid var(--accent); padding: .1rem 0 .1rem .9rem;
+      margin: 1rem 0 0; color: var(--muted); font-size: .9rem;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    th, td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+    .user {
+      display: flex; align-items: center; gap: .8rem;
+      padding: .9rem 1.1rem; border-radius: 10px;
+      background: rgba(27,158,179,.1); border: 1px solid rgba(27,158,179,.35);
+      margin-bottom: 1.25rem; font-size: .9rem;
+    }
+    .user .avatar {
+      width: 2.4rem; height: 2.4rem; border-radius: 50%; flex: none;
+      background: var(--accent); color: #fff; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .user b { display: block; }
+    .user span { color: var(--muted); font-size: .84rem; }
+
+    /* ---------------------------------------------------------------- */
+    /* THIS EXAMPLE PAGE ONLY - no need to copy any of this to your app  */
+    .keybar {
+      background: var(--card); border: 1px dashed var(--border); border-radius: 12px;
+      padding: 1rem 1.4rem; margin-bottom: 1.25rem; font-size: .88rem;
+    }
+    .keybar label { font-weight: 600; display: block; margin-bottom: .4rem; }
+    .keybar input {
+      width: 100%; box-sizing: border-box; padding: .5rem .7rem; font: inherit;
+      font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .82rem;
+      color: var(--text); background: var(--bg);
+      border: 1px solid var(--border); border-radius: 8px;
+    }
+    .keybar button {
+      margin-top: .6rem; font: inherit; font-size: .85rem; font-weight: 600;
+      padding: .45rem 1rem; border-radius: 8px; cursor: pointer;
+      background: var(--accent); border: 1px solid var(--accent); color: #fff;
+    }
+    .keybar .hint { color: var(--muted); font-size: .8rem; margin: .5rem 0 0; }
+    /* ---------------------------------------------------------------- */
+  </style>
+
+  <!-- 1 of 2 - the widget stylesheet -->
+  <link rel="stylesheet" href="./widget.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Signed-in Customer</h1>
+    <p class="sub">The identity comes from the page, so the customer never fills in a form — one tap starts the chat.</p>
+
+    <div class="user">
+      <div class="avatar">B</div>
+      <div>
+        <b>Budi Santoso</b>
+        <span>budi@example.com &middot; 081234567890</span>
+      </div>
+    </div>
+
+    <!-- ==================== THIS EXAMPLE PAGE ONLY ==================== -->
+    <div class="keybar">
+      <label for="key">Widget key, to try this page out</label>
+      <input type="text" id="key" spellcheck="false" placeholder="Paste the widget key from the C-iCare team">
+      <button type="button" id="apply">Load widget</button>
+      <p class="hint">This box is a testing aid only. In your app the key is written straight into
+        the <code>data-widget-key</code> attribute.</p>
+    </div>
+    <!-- ================================================================ -->
+
+    <div class="card">
+      <h2>Option A — server-rendered page (PHP, Laravel, Django, Rails, .NET)</h2>
+      <p>The safest route: the identity is printed from the server-side session, never from user input.</p>
+<pre><code>&lt;!-- Laravel / Blade --&gt;
+&lt;div id="livechat-app"
+     class="livechat-widget"
+     data-widget-key="YOUR_WIDGET_KEY"
+     data-name="{{ auth()-&gt;user()-&gt;name }}"
+     data-email="{{ auth()-&gt;user()-&gt;email }}"
+     data-phone="{{ auth()-&gt;user()-&gt;phone }}"&gt;&lt;/div&gt;
+
+&lt;script type="module" crossorigin
+        src="https://cdn.example.com/widget/widget.js"&gt;&lt;/script&gt;</code></pre>
+      <p class="note">Your template engine escapes these values for you. If you build the HTML as a
+        string yourself, escape them — a customer's name can contain a quote character.</p>
+    </div>
+
+    <div class="card">
+      <h2>Option B — browser-rendered page (React, Vue, Angular, any SPA)</h2>
+      <p>Set the attributes first, then load the bundle. The widget reads them <b>once</b>, at
+         startup, so the order matters.</p>
+<pre><code>&lt;div id="livechat-app" class="livechat-widget"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  // user comes from your app's own session
+  var user = window.currentUser;
+  var el = document.getElementById('livechat-app');
+
+  el.setAttribute('data-widget-key', 'YOUR_WIDGET_KEY');
+  if (user.name)  el.setAttribute('data-name',  user.name);
+  if (user.email) el.setAttribute('data-email', user.email);
+  if (user.phone) el.setAttribute('data-phone', user.phone);
+
+  // load the bundle AFTER the attributes are in place
+  var s = document.createElement('script');
+  s.type = 'module';
+  s.crossOrigin = 'anonymous';
+  s.src = 'https://cdn.example.com/widget/widget.js';
+  document.body.appendChild(s);
+&lt;/script&gt;</code></pre>
+      <p class="note">Do not set empty attributes. <code>data-email=""</code> counts as absent,
+        but it is cleaner to leave out any attribute whose value you do not have.</p>
+    </div>
+
+    <div class="card">
+      <h2>When the user signs out or switches account</h2>
+      <p>The widget keeps the chat session in the browser's <code>localStorage</code> under the
+        <code>cwidget_</code> prefix. Clear it on sign-out so one user's conversation does not
+        follow the next one, then reload the page.</p>
+<pre><code>Object.keys(localStorage)
+  .filter(function (k) { return k.indexOf('cwidget_') === 0; })
+  .forEach(function (k) { localStorage.removeItem(k); });
+
+location.reload();</code></pre>
+    </div>
+
+    <div class="card">
+      <h2>Attributes used by this page</h2>
+      <table>
+        <tr><th>Attribute</th><th>Value</th><th>Notes</th></tr>
+        <tr><td><code>data-widget-key</code></td><td>channel key</td><td>Required</td></tr>
+        <tr><td><code>data-name</code></td><td>Budi Santoso</td><td>Optional, a label only</td></tr>
+        <tr><td><code>data-email</code></td><td>budi@example.com</td><td>Contact</td></tr>
+        <tr><td><code>data-phone</code></td><td>081234567890</td><td>Contact</td></tr>
+      </table>
+      <p class="note"><code>data-form</code> has no effect in this mode — there is nothing left to
+        ask the customer.</p>
+    </div>
+  </div>
+
+  <!--
+    2 of 2 - the widget mount point.
+    The values below are a static illustration. In a real app they come from the
+    signed-in session (see Option A or Option B above).
+  -->
+  <div id="livechat-app"
+       class="livechat-widget"
+       data-widget-key="YOUR_WIDGET_KEY"
+       data-name="Budi Santoso"
+       data-email="budi@example.com"
+       data-phone="081234567890"></div>
+
+  <!--
+    ==================== THIS EXAMPLE PAGE ONLY ====================
+    Fills in the widget key from the test box above. A classic script runs while
+    the page is parsed, so it always runs before widget.js, which is a module and
+    is deferred until parsing finishes. Delete this block in your own app.
+  -->
+  <script>
+    (function () {
+      var STORE = 'cicare-example-key';
+      var mount = document.getElementById('livechat-app');
+      var input = document.getElementById('key');
+
+      var saved = '';
+      try { saved = localStorage.getItem(STORE) || ''; } catch (e) { /* private mode */ }
+
+      var fromUrl = new URLSearchParams(location.search).get('key');
+      var key = fromUrl || saved;
+
+      input.value = key;
+      mount.setAttribute('data-widget-key', key);
+
+      document.getElementById('apply').addEventListener('click', function () {
+        var value = (input.value || '').trim();
+        try { localStorage.setItem(STORE, value); } catch (e) { /* private mode */ }
+        // The bundle only runs once per page, so changing the key means reloading.
+        location.search = value ? '?key=' + encodeURIComponent(value) : '';
+      });
+    })();
+  </script>
+  <!-- ================================================================ -->
+
+  <script type="module" crossorigin src="./widget.js"></script>
+</body>
+</html>

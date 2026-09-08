@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example: Anonymous Visitor - C-iCare Livechat Widget</title>
+
+  <!--
+    ============================================================================
+    EXAMPLE 1 - ANONYMOUS VISITOR (NOT LOGGED IN)
+    ============================================================================
+
+    Use this when your page does NOT know who the visitor is: landing pages,
+    product catalogues, pricing pages, blogs, or any site without a login.
+
+    The widget is given nothing but `data-widget-key`. Since the visitor's
+    identity is unknown, the widget shows a PRE-CHAT FORM first (Name + Email),
+    and the chat starts only after the visitor fills it in.
+
+    Do NOT send data-name / data-email / data-phone here - as soon as either
+    data-email or data-phone is set, the form disappears and is replaced by a
+    single "Start Live Chat" button, which is not what you want for an
+    anonymous visitor.
+
+    For customers who are already signed in, see example-logged-in.html
+    ============================================================================
+  -->
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f6f8; --card: #fff; --text: #1c2733; --muted: #5b6b7a;
+      --border: #d7dee5; --accent: #1B9EB3; --code-bg: #1e2127; --code-fg: #d5d8dd;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #14181c; --card: #1c2126; --text: #e8edf2; --muted: #9aa8b5; --border: #333c45; }
+    }
+    body {
+      margin: 0; padding: 2.5rem 1.25rem; background: var(--bg); color: var(--text);
+      font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    .wrap { max-width: 44rem; margin: 0 auto; }
+    h1 { font-size: 1.35rem; margin: 0 0 .25rem; }
+    p.sub { margin: 0 0 1.75rem; color: var(--muted); }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 1.4rem; margin-bottom: 1.25rem;
+    }
+    .card h2 {
+      font-size: .78rem; text-transform: uppercase; letter-spacing: .06em;
+      color: var(--muted); margin: 0 0 .85rem;
+    }
+    pre {
+      background: var(--code-bg); color: var(--code-fg); border-radius: 8px;
+      padding: 1rem; overflow-x: auto; margin: 0;
+      font: 13px/1.6 ui-monospace, Menlo, Consolas, monospace;
+    }
+    code { font-family: ui-monospace, Menlo, Consolas, monospace; }
+    p code, li code {
+      background: rgba(127,127,127,.15); padding: 1px 5px; border-radius: 4px; font-size: .87em;
+    }
+    ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+    li { margin-bottom: .35rem; }
+    .note {
+      border-left: 3px solid var(--accent); padding: .1rem 0 .1rem .9rem;
+      margin: 1rem 0 0; color: var(--muted); font-size: .9rem;
+    }
+    .warn { font-size: .85rem; color: var(--muted); margin: 1rem 0 0; }
+
+    /* ---------------------------------------------------------------- */
+    /* THIS EXAMPLE PAGE ONLY - no need to copy any of this to your site */
+    .keybar {
+      background: var(--card); border: 1px dashed var(--border); border-radius: 12px;
+      padding: 1rem 1.4rem; margin-bottom: 1.25rem; font-size: .88rem;
+    }
+    .keybar label { font-weight: 600; display: block; margin-bottom: .4rem; }
+    .keybar input {
+      width: 100%; box-sizing: border-box; padding: .5rem .7rem; font: inherit;
+      font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .82rem;
+      color: var(--text); background: var(--bg);
+      border: 1px solid var(--border); border-radius: 8px;
+    }
+    .keybar button {
+      margin-top: .6rem; font: inherit; font-size: .85rem; font-weight: 600;
+      padding: .45rem 1rem; border-radius: 8px; cursor: pointer;
+      background: var(--accent); border: 1px solid var(--accent); color: #fff;
+    }
+    .keybar .hint { color: var(--muted); font-size: .8rem; margin: .5rem 0 0; }
+    /* ---------------------------------------------------------------- */
+  </style>
+
+  <!-- 1 of 2 - the widget stylesheet -->
+  <link rel="stylesheet" href="./widget.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Anonymous Visitor</h1>
+    <p class="sub">The widget is installed with nothing but <code>data-widget-key</code>. The visitor fills in a short pre-chat form before the conversation starts.</p>
+
+    <!-- ==================== THIS EXAMPLE PAGE ONLY ==================== -->
+    <div class="keybar">
+      <label for="key">Widget key, to try this page out</label>
+      <input type="text" id="key" spellcheck="false" placeholder="Paste the widget key from the C-iCare team">
+      <button type="button" id="apply">Load widget</button>
+      <p class="hint">This box is a testing aid only. On your own site you write the key straight
+        into the <code>data-widget-key</code> attribute, exactly as in the snippet below.</p>
+    </div>
+    <!-- ================================================================ -->
+
+    <div class="card">
+      <h2>The snippet you copy into your page</h2>
+<pre><code>&lt;!-- put this inside &lt;head&gt; --&gt;
+&lt;link rel="stylesheet" href="https://cdn.example.com/widget/widget.css"&gt;
+
+&lt;!-- put this just before &lt;/body&gt; --&gt;
+&lt;div id="livechat-app"
+     class="livechat-widget"
+     data-widget-key="YOUR_WIDGET_KEY"&gt;&lt;/div&gt;
+
+&lt;script type="module" crossorigin
+        src="https://cdn.example.com/widget/widget.js"&gt;&lt;/script&gt;</code></pre>
+      <p class="note">Replace <code>https://cdn.example.com/widget/</code> with the URL the C-iCare
+        team gave you, and <code>YOUR_WIDGET_KEY</code> with your channel key.</p>
+    </div>
+
+    <div class="card">
+      <h2>What must not change</h2>
+      <ul>
+        <li><code>id="livechat-app"</code> — the widget looks for this element. Only one per page.</li>
+        <li><code>class="livechat-widget"</code> — required. The widget's styles are written against
+          <code>#livechat-app.livechat-widget</code>; without the class your layout will break.</li>
+        <li><code>data-widget-key</code> — required. Without a valid key nothing renders at all.</li>
+        <li><code>type="module"</code> on the script tag — required, the bundle is an ES module.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Optional: position and form fields</h2>
+<pre><code>&lt;div id="livechat-app"
+     class="livechat-widget"
+     data-widget-key="YOUR_WIDGET_KEY"
+     data-pos="left"
+     data-form="name,email,phone"&gt;&lt;/div&gt;</code></pre>
+      <ul>
+        <li><code>data-pos</code> — <code>right</code> (default) or <code>left</code>.</li>
+        <li><code>data-form</code> — which fields the pre-chat form asks for. Any combination of
+          <code>name</code>, <code>email</code>, <code>phone</code>. Left out, the form asks for
+          <b>Name + Email</b>.</li>
+      </ul>
+      <p class="warn">The form must ask for at least <code>email</code> or <code>phone</code> —
+        a chat cannot start without one of those contacts.</p>
+    </div>
+  </div>
+
+  <!--
+    2 of 2 - the widget mount point.
+    Note there is no data-name, data-email or data-phone here.
+  -->
+  <div id="livechat-app"
+       class="livechat-widget"
+       data-widget-key="YOUR_WIDGET_KEY"></div>
+
+  <!--
+    ==================== THIS EXAMPLE PAGE ONLY ====================
+    A classic script runs while the page is being parsed, so it always runs
+    before widget.js, which is a module and is therefore deferred until parsing
+    finishes. That is why the key can still be filled in here.
+
+    On your own site you delete this block - the key goes in the attribute.
+  -->
+  <script>
+    (function () {
+      var STORE = 'cicare-example-key';
+      var mount = document.getElementById('livechat-app');
+      var input = document.getElementById('key');
+
+      var saved = '';
+      try { saved = localStorage.getItem(STORE) || ''; } catch (e) { /* private mode */ }
+
+      var fromUrl = new URLSearchParams(location.search).get('key');
+      var key = fromUrl || saved;
+
+      if (key) {
+        input.value = key;
+        mount.setAttribute('data-widget-key', key);
+      } else {
+        // Without a valid key verify-token rejects the request and the widget
+        // is not rendered. Blank it out so the placeholder is not sent.
+        mount.setAttribute('data-widget-key', '');
+      }
+
+      document.getElementById('apply').addEventListener('click', function () {
+        var value = (input.value || '').trim();
+        try { localStorage.setItem(STORE, value); } catch (e) { /* private mode */ }
+        // The bundle only runs once per page, so changing the key means
+        // reloading the page.
+        location.search = value ? '?key=' + encodeURIComponent(value) : '';
+      });
+    })();
+  </script>
+  <!-- ================================================================ -->
+
+  <script type="module" crossorigin src="./widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="./favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C-iCare Livechat Widget - Setup</title>
+    <!--
+      The widget bundle and CSS are NOT loaded here. Both are injected by the
+      script below once data-widget-key has been filled in, so the widget never
+      starts with an empty key, or with an old key hardcoded into this file.
+    -->
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f4f6f8;
+        --card: #ffffff;
+        --text: #1c2733;
+        --muted: #5b6b7a;
+        --border: #d7dee5;
+        --accent: #1B9EB3;
+        --accent-text: #ffffff;
+        --danger: #c0392b;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #14181c;
+          --card: #1c2126;
+          --text: #e8edf2;
+          --muted: #9aa8b5;
+          --border: #333c45;
+          --danger: #ff7b6b;
+        }
+      }
+      body.setup-page {
+        margin: 0;
+        padding: 2.5rem 1.25rem;
+        background: var(--bg);
+        color: var(--text);
+        font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+      .setup-wrap { max-width: 40rem; margin: 0 auto; }
+      .setup-wrap h1 { font-size: 1.35rem; margin: 0 0 .25rem; }
+      .setup-wrap p.sub { margin: 0 0 1.5rem; color: var(--muted); }
+      .setup-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+      }
+      .setup-card label {
+        display: block;
+        font-size: .82rem;
+        font-weight: 600;
+        letter-spacing: .01em;
+        margin-bottom: .35rem;
+      }
+      .setup-card .hint {
+        display: block;
+        font-weight: 400;
+        font-size: .78rem;
+        color: var(--muted);
+        margin-top: .3rem;
+      }
+      .setup-card .field { margin-bottom: 1.1rem; }
+      .setup-card input[type="text"],
+      .setup-card textarea,
+      .setup-card select {
+        width: 100%;
+        box-sizing: border-box;
+        padding: .55rem .7rem;
+        font: inherit;
+        font-size: .9rem;
+        color: var(--text);
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+      .setup-card textarea {
+        min-height: 5.5rem;
+        resize: vertical;
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-size: .8rem;
+        word-break: break-all;
+      }
+      .setup-card input:focus, .setup-card textarea:focus, .setup-card select:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 1px;
+        border-color: var(--accent);
+      }
+      .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+      .row > .field { flex: 1 1 10rem; }
+      .check { display: flex; align-items: center; gap: .5rem; margin-bottom: 1.1rem; }
+      .check label { margin: 0; font-weight: 400; font-size: .85rem; }
+      .actions { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+      button {
+        font: inherit;
+        font-size: .9rem;
+        padding: .55rem 1.1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        cursor: pointer;
+      }
+      button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); font-weight: 600; }
+      button:hover { filter: brightness(1.05); }
+      .error { color: var(--danger); font-size: .85rem; margin: 0 0 1rem; }
+      .setup-bar {
+        max-width: 40rem;
+        margin: 0 auto;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        color: var(--text);
+      }
+      .setup-bar .status { font-size: .85rem; margin: 0; }
+      .setup-bar .status code {
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-size: .8rem;
+        word-break: break-all;
+      }
+      .setup-bar .status .note { display: block; color: var(--muted); margin-top: .25rem; }
+      [hidden] { display: none !important; }
+    </style>
+  </head>
+  <body class="setup-page">
+    <div class="setup-wrap" id="setup-wrap">
+      <h1>C-iCare Livechat Widget</h1>
+      <p class="sub">Enter your channel key first. The widget is only loaded once <strong>Start widget</strong> is pressed.</p>
+
+      <form class="setup-card" id="setup-form" autocomplete="off">
+        <p class="error" id="setup-error" hidden></p>
+
+        <div class="field">
+          <label for="f-key">data-widget-key <span class="hint">Your channel token. Required.</span></label>
+          <textarea id="f-key" name="key" spellcheck="false" placeholder="U2FsdGVkX1..."></textarea>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="f-lang">data-lang</label>
+            <select id="f-lang" name="lang">
+              <option value="en">en</option>
+              <option value="id">id</option>
+              <option value="ar">ar</option>
+              <option value="jp">jp</option>
+              <option value="ru">ru</option>
+              <option value="cn">cn</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-pos">data-pos</label>
+            <select id="f-pos" name="pos">
+              <option value="right">right</option>
+              <option value="left">left</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-form">data-form <span class="hint">Fields the pre-chat form asks for, comma separated. Leave blank if unused.</span></label>
+          <input type="text" id="f-form" name="form" placeholder="name,email,phone">
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="f-name">data-name</label>
+            <input type="text" id="f-name" name="name">
+          </div>
+          <div class="field">
+            <label for="f-email">data-email</label>
+            <input type="text" id="f-email" name="email">
+          </div>
+          <div class="field">
+            <label for="f-phone">data-phone</label>
+            <input type="text" id="f-phone" name="phone">
+          </div>
+        </div>
+
+        <div class="check">
+          <input type="checkbox" id="f-autostart" name="autostart">
+          <label for="f-autostart">Start automatically the next time this page is opened</label>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="primary">Start widget</button>
+          <button type="button" id="setup-reset">Clear saved settings</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="setup-bar" id="setup-bar" hidden>
+      <p class="status" id="setup-status"></p>
+      <button type="button" id="setup-change">Change settings</button>
+    </div>
+
+    <!-- Widget mount point. data-widget-key is deliberately empty; it is filled in before the bundle loads. -->
+    <div id="livechat-app" class="livechat-widget" data-widget-key=""></div>
+
+    <script>
+      (function () {
+        // Build output filenames. The current Vite config produces
+        // ./widget.js + ./widget.css; older builds produced ./assets/index-*.js.
+        // The first URL that actually exists (with the right type) is the one used.
+        var JS_CANDIDATES = ['./widget.js', './assets/index-79d24190.js'];
+        var CSS_CANDIDATES = ['./widget.css', './assets/index-b951af68.css'];
+        var STORE = 'cicare-widget-setup';
+        var FIELDS = ['key', 'lang', 'pos', 'form', 'name', 'email', 'phone'];
+
+        var mount = document.getElementById('livechat-app');
+        var wrap = document.getElementById('setup-wrap');
+        var form = document.getElementById('setup-form');
+        var errorEl = document.getElementById('setup-error');
+        var bar = document.getElementById('setup-bar');
+        var statusEl = document.getElementById('setup-status');
+
+        function readStore() {
+          try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch (e) { return {}; }
+        }
+        function writeStore(value) {
+          try { localStorage.setItem(STORE, JSON.stringify(value)); } catch (e) { /* private mode */ }
+        }
+        function clearStore() {
+          try { localStorage.removeItem(STORE); } catch (e) { /* private mode */ }
+        }
+
+        function values() {
+          var out = {};
+          FIELDS.forEach(function (f) {
+            out[f] = (form.elements[f].value || '').trim();
+          });
+          out.autostart = form.elements.autostart.checked;
+          return out;
+        }
+
+        function mask(key) {
+          return key.length > 18 ? key.slice(0, 10) + '...' + key.slice(-6) : key;
+        }
+
+        // Prefill: the query string beats any stored value, so ?key=...&lang=id
+        // can be used for a quick test without retyping anything.
+        var params = new URLSearchParams(location.search);
+        var saved = readStore();
+        FIELDS.forEach(function (f) {
+          var value = params.has(f) ? params.get(f) : saved[f];
+          if (value) form.elements[f].value = value;
+        });
+        form.elements.autostart.checked = params.get('autostart') === '1' || saved.autostart === true;
+
+        // Picking the asset URL: static servers often answer 200 + index.html for
+        // a file that does not exist, so the content-type is checked too -
+        // otherwise HTML would slip through and be loaded as a module.
+        function pick(candidates, type, done) {
+          if (typeof fetch !== 'function' || location.protocol === 'file:') return done(candidates[0]);
+          var i = 0;
+          (function next() {
+            if (i >= candidates.length) return done(candidates[0]);
+            var url = candidates[i++];
+            fetch(url, { method: 'HEAD' }).then(function (res) {
+              var ct = (res.headers.get('content-type') || '').toLowerCase();
+              if (res.ok && ct.indexOf(type) !== -1) return done(url);
+              next();
+            }).catch(next);
+          })();
+        }
+
+        function start(config) {
+          mount.setAttribute('data-widget-key', config.key);
+          FIELDS.forEach(function (f) {
+            if (f === 'key') return;
+            if (config[f]) mount.setAttribute('data-' + f, config[f]);
+            else mount.removeAttribute('data-' + f);
+          });
+
+          wrap.hidden = true;
+          bar.hidden = false;
+          statusEl.innerHTML = 'Widget loaded with key <code></code>' +
+            '<span class="note">The chat icon appears in the corner of the page. If it does not, ' +
+            'open the console - verify-token rejected this key.</span>';
+          statusEl.querySelector('code').textContent = mask(config.key);
+
+          pick(CSS_CANDIDATES, 'css', function (href) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.head.appendChild(link);
+          });
+          pick(JS_CANDIDATES, 'javascript', function (src) {
+            var script = document.createElement('script');
+            script.type = 'module';
+            script.crossOrigin = 'anonymous';
+            script.src = src;
+            script.onerror = function () {
+              statusEl.textContent = 'Failed to load the widget bundle from ' + src +
+                ' - update JS_CANDIDATES in index.html to match the built filenames.';
+            };
+            document.body.appendChild(script);
+          });
+        }
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var config = values();
+          if (!config.key) {
+            errorEl.textContent = 'data-widget-key is required.';
+            errorEl.hidden = false;
+            form.elements.key.focus();
+            return;
+          }
+          errorEl.hidden = true;
+          writeStore(config);
+          start(config);
+        });
+
+        document.getElementById('setup-reset').addEventListener('click', function () {
+          clearStore();
+          form.reset();
+          errorEl.hidden = true;
+          form.elements.key.focus();
+        });
+
+        // The widget bundle can only be loaded once per page, so changing the
+        // settings means reloading the page - with autostart switched off, so
+        // the form comes back.
+        document.getElementById('setup-change').addEventListener('click', function () {
+          var config = readStore();
+          config.autostart = false;
+          writeStore(config);
+          location.reload();
+        });
+
+        if (form.elements.autostart.checked && form.elements.key.value.trim()) {
+          start(values());
+        }
+      })();
+    </script>
+  </body>
+</html>
