@@ -33,7 +33,7 @@ backend changes, and no dependency on any framework.
 | **Widget URL** | Where `widget.js` and `widget.css` are served from, given to you by the C-iCare team. |
 | **A page served over HTTP/HTTPS** | The widget is an ES module — it does not run from `file://`. |
 
-Throughout this guide the widget URL is written as `https://cdn.example.com/widget/`.
+Throughout this guide the widget URL is written as `https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@v2.0.1/`.
 **Replace it with the URL you were given.**
 
 ### The files being served
