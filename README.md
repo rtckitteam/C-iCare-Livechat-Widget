@@ -712,6 +712,19 @@ python3 -m http.server 8080
 
 ---
 
+## License
+
+The widget is proprietary software, licensed rather than sold. Your active
+C-iCare subscription grants you the right to embed it, unmodified, on properties
+you own or operate. Redistribution, resale, and reverse-engineering are not
+permitted.
+
+The full terms are in [LICENSE](LICENSE), next to this guide. Section 5 lists the
+open-source components bundled inside the widget, which remain under their own
+licenses.
+
+---
+
 ## Need help?
 
 Include the following so we can look into it quickly:

@@ -1,0 +1,216 @@
+C-iCare Livechat Widget
+END USER LICENSE AGREEMENT
+
+Copyright (c) 2026 C-iCare. All rights reserved.
+
+IMPORTANT — READ CAREFULLY. This End User License Agreement ("Agreement") is a
+legal agreement between you, either an individual or a single legal entity
+("You" or "Licensee"), and C-iCare ("Licensor") for the C-iCare Livechat Widget,
+which includes the JavaScript bundle, stylesheets, fonts, images, sample files,
+and accompanying documentation (collectively, the "Software").
+
+BY EMBEDDING, INSTALLING, ACCESSING, OR OTHERWISE USING THE SOFTWARE, YOU AGREE
+TO BE BOUND BY THE TERMS OF THIS AGREEMENT. IF YOU DO NOT AGREE, DO NOT USE THE
+SOFTWARE.
+
+
+1. DEFINITIONS
+
+1.1 "Subscription" means an active, paid-up service agreement between You and
+    Licensor for the C-iCare livechat service.
+
+1.2 "Widget Key" means the channel token issued to You by Licensor that
+    identifies Your channel to the C-iCare service.
+
+1.3 "Authorized Property" means a website, web application, or mobile
+    application that You own or operate, or that You operate on behalf of a
+    client under a written agreement with that client.
+
+1.4 "Service" means the hosted C-iCare livechat backend that the Software
+    communicates with.
+
+
+2. GRANT OF LICENSE
+
+Subject to Your continued compliance with this Agreement and the existence of an
+active Subscription, Licensor grants You a limited, non-exclusive,
+non-transferable, non-sublicensable, revocable license to:
+
+2.1 Embed the Software, in unmodified form, on Authorized Properties;
+
+2.2 Reference the Software from URLs designated by Licensor, or host an
+    unmodified copy of the distributed files on infrastructure You control for
+    the sole purpose of serving Authorized Properties;
+
+2.3 Configure the Software solely through the documented `data-*` attributes and
+    the channel configuration supplied by Licensor; and
+
+2.4 Use the accompanying documentation and sample files internally, and adapt
+    the sample files as needed to integrate the Software into Authorized
+    Properties.
+
+This license conveys no ownership of the Software. All rights not expressly
+granted are reserved by Licensor.
+
+
+3. RESTRICTIONS
+
+Except to the extent that the following restrictions are prohibited by
+applicable law, You shall not, and shall not permit any third party to:
+
+3.1 Sell, resell, rent, lease, lend, sublicense, distribute, or otherwise make
+    the Software available to any third party as a standalone product, or as
+    part of a product that competes with the Service;
+
+3.2 Modify, adapt, translate, or create derivative works of the Software, other
+    than the sample files as permitted in Section 2.4;
+
+3.3 Reverse engineer, decompile, disassemble, deobfuscate, or otherwise attempt
+    to derive the source code, structure, or algorithms of the Software, except
+    to the extent such activity is expressly permitted by applicable law
+    notwithstanding this limitation;
+
+3.4 Remove, obscure, or alter any copyright, trademark, or other proprietary
+    notice contained in or displayed by the Software, including the footer
+    attribution, except where Licensor has enabled such change through the
+    channel configuration;
+
+3.5 Use the Software to build, train, or improve a competing product or service;
+
+3.6 Share, publish, or use a Widget Key issued to another party, or use the
+    Software with any backend other than the Service;
+
+3.7 Use the Software in any manner that violates applicable law, infringes the
+    rights of others, or transmits unlawful, harmful, or abusive content; or
+
+3.8 Circumvent or attempt to circumvent any usage limit, access control,
+    authentication mechanism, or other technical restriction of the Software or
+    the Service.
+
+
+4. OWNERSHIP
+
+The Software is licensed, not sold. Licensor and its licensors retain all right,
+title, and interest in and to the Software, including all intellectual property
+rights therein. The C-iCare name, logo, and other Licensor trademarks are the
+property of Licensor, and this Agreement grants You no right to use them except
+as they appear in the unmodified Software.
+
+
+5. THIRD-PARTY COMPONENTS
+
+The Software incorporates open-source components that remain subject to their
+own license terms, which take precedence over this Agreement with respect to
+those components. These include, without limitation:
+
+  Vue, Vue Router, Vue I18n, Pinia, Vuex, axios, crypto-js,
+  cookie-signature, pusher-js, SIP.js, vue3-cookies, vue3-storage,
+  @intlify/unplugin-vue-i18n .............................. MIT License
+  vue-cryptojs ................................. Academic Free License 2.0
+
+Copyright notices and full license texts for these components are retained in
+the distributed bundle. Nothing in this Agreement restricts Your rights under
+those licenses with respect to those components.
+
+
+6. DATA AND PRIVACY
+
+6.1 The Software transmits chat messages, attachments, and any identity values
+    You supply through `data-name`, `data-email`, and `data-phone` to the
+    Service, where they are processed in accordance with the data processing
+    terms of Your Subscription.
+
+6.2 You are solely responsible for obtaining any consent required by applicable
+    law before supplying end-user personal data to the Software, and for the
+    accuracy and lawfulness of the identity values Your properties pass to it.
+
+6.3 You acknowledge that the Widget Key is publicly visible in page source by
+    design, and that it is not a secret credential. You are responsible for
+    keeping any other credential out of the Software's configuration attributes.
+
+
+7. SUPPORT AND UPDATES
+
+Support, maintenance, and updates are provided only as described in Your
+Subscription. Licensor may modify, update, or discontinue any version of the
+Software at any time. Licensor is under no obligation to maintain backward
+compatibility with modified or self-hosted copies of the Software.
+
+
+8. TERM AND TERMINATION
+
+8.1 This Agreement takes effect when You first use the Software and continues
+    until terminated.
+
+8.2 This Agreement terminates automatically, without notice, upon expiry or
+    cancellation of Your Subscription, or upon Your breach of any term of this
+    Agreement.
+
+8.3 Upon termination You shall immediately cease all use of the Software and
+    remove it from all properties under Your control, and delete all copies of
+    the distributed files in Your possession.
+
+8.4 Sections 3, 4, 5, 9, 10, 11, and 12 survive termination.
+
+
+9. DISCLAIMER OF WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NONINFRINGEMENT.
+LICENSOR DOES NOT WARRANT THAT THE SOFTWARE WILL BE UNINTERRUPTED, ERROR-FREE,
+SECURE, OR COMPATIBLE WITH ANY PARTICULAR BROWSER, DEVICE, OR THIRD-PARTY
+SOFTWARE.
+
+
+10. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL LICENSOR OR
+ITS SUPPLIERS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR
+PUNITIVE DAMAGES, OR FOR ANY LOSS OF PROFITS, REVENUE, DATA, GOODWILL, OR
+BUSINESS INTERRUPTION, ARISING OUT OF OR RELATED TO THIS AGREEMENT OR THE USE OF
+OR INABILITY TO USE THE SOFTWARE, WHETHER IN CONTRACT, TORT, OR OTHERWISE, EVEN
+IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+LICENSOR'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT
+SHALL NOT EXCEED THE AMOUNTS PAID BY YOU UNDER YOUR SUBSCRIPTION IN THE TWELVE
+(12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM.
+
+SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES,
+SO THE ABOVE MAY NOT APPLY TO YOU IN FULL.
+
+
+11. INDEMNIFICATION
+
+You shall indemnify, defend, and hold harmless Licensor from and against any
+claim, demand, loss, liability, or expense (including reasonable legal fees)
+arising out of Your use of the Software in breach of this Agreement, Your
+violation of applicable law, or content transmitted through Your channel.
+
+
+12. GENERAL
+
+12.1 Governing law. This Agreement is governed by the laws of the Republic of
+     Indonesia, without regard to its conflict-of-law rules.
+
+12.2 Entire agreement. This Agreement, together with Your Subscription terms,
+     constitutes the entire agreement between the parties regarding the Software
+     and supersedes all prior understandings. Where a term of this Agreement
+     conflicts with a signed agreement between You and Licensor, the signed
+     agreement prevails.
+
+12.3 Severability. If any provision is held unenforceable, the remaining
+     provisions remain in full force and effect.
+
+12.4 No waiver. A failure to enforce any provision is not a waiver of the right
+     to enforce it later.
+
+12.5 Assignment. You may not assign this Agreement without Licensor's prior
+     written consent. Licensor may assign it freely.
+
+12.6 Notices. Legal notices to Licensor should be sent to the address or contact
+     designated in Your Subscription.
+
+
+For licensing enquiries, additional channels, or permission to use the Software
+in a manner not granted above, contact the C-iCare team.
