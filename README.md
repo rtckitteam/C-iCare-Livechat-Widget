@@ -66,7 +66,7 @@ into the test box on the page, and press **Load widget**.
 Paste inside `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://cdn.example.com/widget/widget.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.css">
 ```
 
 Paste just before `</body>`:
@@ -77,7 +77,7 @@ Paste just before `</body>`:
      data-widget-key="YOUR_WIDGET_KEY"></div>
 
 <script type="module" crossorigin
-        src="https://cdn.example.com/widget/widget.js"></script>
+        src="https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.js"></script>
 ```
 
 That's it. The chat icon appears in the bottom-right corner of the page.
@@ -218,7 +218,7 @@ For signed-in WordPress users:
      <?php endif; ?>></div>
 
 <script type="module" crossorigin
-        src="https://cdn.example.com/widget/widget.js"></script>
+        src="https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.js"></script>
 ```
 
 ### Laravel / Blade
@@ -234,7 +234,7 @@ For signed-in WordPress users:
      @endauth></div>
 
 <script type="module" crossorigin
-        src="https://cdn.example.com/widget/widget.js"></script>
+        src="https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.js"></script>
 ```
 
 ### React / Next.js
@@ -257,14 +257,14 @@ export default function LivechatWidget({ user }) {
 
     const css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = 'https://cdn.example.com/widget/widget.css';
+    css.href = 'https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.css';
     document.head.appendChild(css);
 
     const script = document.createElement('script');
     script.id = 'cicare-widget-script';
     script.type = 'module';
     script.crossOrigin = 'anonymous';
-    script.src = 'https://cdn.example.com/widget/widget.js';
+    script.src = 'https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.js';
     document.body.appendChild(script);
   }, [user]);
 
@@ -300,13 +300,13 @@ onMounted(() => {
 
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = 'https://cdn.example.com/widget/widget.css';
+  css.href = 'https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.css';
   document.head.appendChild(css);
 
   const script = document.createElement('script');
   script.type = 'module';
   script.crossOrigin = 'anonymous';
-  script.src = 'https://cdn.example.com/widget/widget.js';
+  script.src = 'https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.js';
   document.body.appendChild(script);
 });
 </script>
@@ -341,7 +341,7 @@ Create a simple page on your server. Example (Laravel, route `/chat`):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Support</title>
-  <link rel="stylesheet" href="https://cdn.example.com/widget/widget.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.css">
   <style>
     html, body { margin: 0; height: 100%; background: #fff; }
   </style>
@@ -357,7 +357,7 @@ Create a simple page on your server. Example (Laravel, route `/chat`):
        @endauth></div>
 
   <script type="module" crossorigin
-          src="https://cdn.example.com/widget/widget.js"></script>
+          src="https://cdn.jsdelivr.net/gh/rtckitteam/C-iCare-Livechat-Widget@{RELEASE_TAG}/widget.js"></script>
 </body>
 </html>
 ```
@@ -711,7 +711,11 @@ python3 -m http.server 8080
 - [ ] Reloaded the page mid-chat — the conversation continued instead of restarting
 
 ---
+## Latest Release
 
+Our latest release version is v2.0.1
+
+---
 ## License
 
 The widget is proprietary software, licensed rather than sold. Your active
