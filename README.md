@@ -713,7 +713,7 @@ python3 -m http.server 8080
 ---
 ## Latest Release
 
-Our latest release version is v2.0.1
+Our latest release version is v2.0.2
 
 ---
 ## License
